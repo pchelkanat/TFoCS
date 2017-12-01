@@ -26,13 +26,17 @@ def find_sd(n):
 
 
 def MillerRabin(n, r=5):
+    # простые числа < 6 принимаются за составные, поэтому определим их
+    if n < 6:
+        return [False, False, True, True, False, True][n]
+    elif n & 1 == 0:
+        return False
+
     #число свидетелей простоты
     countOfWitnesses = 0
     # порядковое присваивание s и d
     s, d = find_sd(n)
     #print(s, d)
-
-    #
     for a in range(2, r + 2):
         # x = pow(a, d, n)  # x=a^d mod n
         x = (a ** d) % n
@@ -56,4 +60,4 @@ def MillerRabin(n, r=5):
     return True  # Простое
 
 
-print(MillerRabin(1567451))
+print(MillerRabin(5))
